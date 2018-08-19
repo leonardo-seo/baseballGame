@@ -24,8 +24,8 @@ class Baseball {
   }
 
   random (arr) {
-    for (var i = 0; i < 3; i++) {
-      var num = Math.floor(Math.random() * 9) + 1;
+    for (let i = 0; i < 3; i++) {
+      let num = Math.floor(Math.random() * 9) + 1;
       if (arr.includes(num)) {
         num = Math.floor(Math.random() * 9) + 1;
         i--;
