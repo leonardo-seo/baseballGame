@@ -1,2 +1,8 @@
-# codeSquad
-level2
+# codeSquad 야구게임
+
+야구게임 구현코드입니다.
+브라우저 상에서 동작하도록 작성했습니다.
+
+## 시작하기
+
+본 레포를 clone 하시고 `index.html`을 실행합니다.
