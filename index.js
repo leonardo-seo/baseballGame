@@ -1,18 +1,14 @@
 class Baseball {
 
   constructor() {
-    this.randomArray = [];
+    // 변수생성하기
     this.strike = 0;
     this.ball = 0;
     this.input_num = 0;
   }
 
-  getRandom() {
-    // 3자리 숫자를 랜덤으로 생성하기
-    this.random(this.randomArray);
-  }
-
   init() {
+    // 변수 초기화
     this.strike = 0;
     this.ball = 0;
   }
@@ -23,20 +19,32 @@ class Baseball {
     this.input_num = input_num;
   }
 
-  random (arr) {
+  random () {
+    // 맞출 숫자 3자리 생성하기
+    let randomArray = [];
     for (let i = 0; i < 3; i++) {
       let num = Math.floor(Math.random() * 9) + 1;
-      if (arr.includes(num)) {
+      if (this.arrIncludes(randomArray, num)) {
         num = Math.floor(Math.random() * 9) + 1;
         i--;
       } else {
-        arr.push(num);
+        randomArray.push(num);
       }
     }
-    console.log(arr);
+    console.log(randomArray);
+    return randomArray
+  }
+
+  // 특정 숫자가 넘버 안에 들어있는지 확인하기
+  arrIncludes(arr, num) {
+    for(let i = 0; i < arr.length; i++) {
+      if(arr[i] == num) {
+        return true;
+      } 
+    } return false;
   }
   
-  check (strike, ball, input_num) {
+  check(strike, ball, input_num) {
     if (strike == 0 && ball != 0) {
       console.log(input_num + ') ' + '0스트라이크 ' + ball + '볼');
     } else if(strike != 0 && ball == 0) {
@@ -48,14 +56,14 @@ class Baseball {
     }
   };
 
-  judgement() {
+  judge(randomArray) {
     // 스트라이크 & 볼 카운트 하기
     for (let i = 0; i < 3; i++) {
-      if (this.input_num[i] == this.randomArray[i]) {
+      if (this.input_num[i] == randomArray[i]) {
         this.strike++;
       }
       for (let j = 0; j < 3; j++) {
-        if ((i != j) && (this.input_num[i] == this.randomArray[j])) {
+        if ((i != j) && (this.input_num[i] == randomArray[j])) {
           this.ball++;
         }
       }
@@ -63,12 +71,12 @@ class Baseball {
   }
 
   play() {
-    this.getRandom();
+    let randomArray = this.random();
     while (true) {
       this.getInput();
       if (this.input_num === '0') break;
       this.init();
-      this.judgement();
+      this.judge(randomArray);
         
       // 3개의 숫자를 모두 맞힌경우 게임 종료
       if (this.strike === 3) {
